@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.joaovitor.course.entities.Costumer;
-import com.joaovitor.course.repositories.ConstumerRepository;
+import com.joaovitor.course.repositories.CostumerRepository;
 
 @Profile("test") //same name from application.properties spring.profile.active
 @Configuration
 public class TestConfig implements CommandLineRunner{
 	
-	@Autowired
-	private ConstumerRepository costumerRepository;
+	@Autowired //Dependency injection auto
+	private CostumerRepository costumerRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
