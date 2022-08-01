@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable{
@@ -21,10 +23,13 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	
+	
 	@ManyToOne
-	@JoinColumn(name = "client.id") //Must use in Costumer class, @OneToMany(mappedBy = "client")
+	@JoinColumn(name = "client_id") //Must use in Costumer class, @OneToMany(mappedBy = "client")
 	private Costumer client;
 	
 	public Order() {
@@ -32,6 +37,7 @@ public class Order implements Serializable{
 	}
 
 	public Order(Long id, Instant moment, Costumer client) {
+		super();
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
