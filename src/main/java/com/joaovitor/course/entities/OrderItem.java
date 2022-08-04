@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.joaovitor.course.entities.pk.OrderItemPK;
 
 @Entity
@@ -13,7 +14,7 @@ import com.joaovitor.course.entities.pk.OrderItemPK;
 public class OrderItem {
 	
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	private Double price;
@@ -22,7 +23,7 @@ public class OrderItem {
 		
 	}
 
-	public OrderItem(Product product, Order order, Integer quantity, Double price) {
+	public OrderItem( Order order, Product product, Integer quantity, Double price) {
 		super();
 		id.setProduct(product);
 		id.setOrder(order);
@@ -30,19 +31,20 @@ public class OrderItem {
 		this.price = price;
 	}
 	
-	public Product getProductOrderItemPK() {
+	public Product getProductOrderItem() {
 		return id.getProduct();
 	}
 	
-	public void setProductOrderItemPK(Product product) {
+	public void setProductOrderItem(Product product) {
 		id.setProduct(product);
 	}
 	
-	public Order getOrderOrderItemPK() {
+	@JsonIgnore
+	public Order getOrderOrderItem() {
 		return id.getOrder();
 	}
 	
-	public void setOrderOrderItemPK(Order order) {
+	public void setOrderOrderItem(Order order) {
 		id.setOrder(order); 
 	}
 
