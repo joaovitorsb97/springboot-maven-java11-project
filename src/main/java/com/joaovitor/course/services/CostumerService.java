@@ -28,4 +28,8 @@ public class CostumerService {
 		return costumerRepository.save(costumer);
 	}
 	
+	public void delete(Long id) {
+		costumerRepository.deleteById(id);
+	}
+	
 }
