@@ -24,5 +24,8 @@ public class CostumerService {
 		return obj.get();
 	}
 	
+	public Costumer insert(Costumer costumer) {
+		return costumerRepository.save(costumer);
+	}
 	
 }
