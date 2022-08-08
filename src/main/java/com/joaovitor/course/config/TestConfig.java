@@ -12,6 +12,7 @@ import com.joaovitor.course.entities.Category;
 import com.joaovitor.course.entities.Costumer;
 import com.joaovitor.course.entities.Order;
 import com.joaovitor.course.entities.OrderItem;
+import com.joaovitor.course.entities.Payment;
 import com.joaovitor.course.entities.Product;
 import com.joaovitor.course.entities.enums.OrderStatus;
 import com.joaovitor.course.repositories.CategoryRepository;
@@ -82,6 +83,10 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment payment1 = new Payment(null, Instant.parse("2019-07-21T05:42:10Z"), o2);
+		o2.setPayment(payment1);
+		orderRepository.save(o2);
 		
 	}
 	
