@@ -32,4 +32,17 @@ public class CostumerService {
 		costumerRepository.deleteById(id);
 	}
 	
+	public Costumer update(Long id, Costumer costumer) {
+		Costumer entity = costumerRepository.getReferenceById(id);
+		updateData(entity, costumer);
+		return costumerRepository.save(entity);
+	}
+
+	private void updateData(Costumer entity, Costumer costumer) {
+		entity.setName(costumer.getName());
+		entity.setEmail(costumer.getEmail());
+		entity.setPhone(costumer.getPhone());
+		
+	}
+	
 }
