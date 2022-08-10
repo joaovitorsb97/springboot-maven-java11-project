@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.joaovitor.course.entities.Costumer;
 import com.joaovitor.course.repositories.CostumerRepository;
+import com.joaovitor.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CostumerService {
@@ -21,7 +22,7 @@ public class CostumerService {
 	
 	public Costumer findById(Long id) {
 		Optional<Costumer> obj = costumerRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Costumer insert(Costumer costumer) {
