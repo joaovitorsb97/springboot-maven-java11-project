@@ -3,6 +3,8 @@ package com.joaovitor.course.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,9 +45,14 @@ public class CostumerService {
 	}
 	
 	public Costumer update(Long id, Costumer costumer) {
-		Costumer entity = costumerRepository.getReferenceById(id);
-		updateData(entity, costumer);
-		return costumerRepository.save(entity);
+		try {
+			Costumer entity = costumerRepository.getReferenceById(id);
+			updateData(entity, costumer);
+			return costumerRepository.save(entity);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 
 	private void updateData(Costumer entity, Costumer costumer) {
